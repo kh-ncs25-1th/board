@@ -12,7 +12,8 @@ const BoardWritePage=()=>{
     }
     postData("http://localhost:8080/api/boards", boardData)
     .then(data=>{
-      console.log("게시글저장 성공");
+
+      console.log("게시글저장 성공", data);
     })
     .catch(error=>{
       console.log("서버 연결 실패")
