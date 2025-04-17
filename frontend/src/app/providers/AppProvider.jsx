@@ -1,16 +1,32 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import DefaultLoyout from "../layouts/DefaultLoyout";
+import DefaultLayout from "../layouts/DefaultLayout";
+import BoardPage from "../../pages/board/BoardPage";
 import HomePage from "../../pages/HomePage";
+import BoardWritePage from "../../pages/board/BoardWritePage";
 
 const router=createBrowserRouter([
   {
     path:"/",
-    element:<DefaultLoyout />,
+    element:<DefaultLayout />,
     children:[
       {
         index: true,
         element: <HomePage />
-      }
+      },
+      {
+        path: "boards",
+        children:[
+          {
+            index: true,
+            element: <BoardPage />
+          },
+          {
+            path: "new",
+            element: <BoardWritePage />
+          },
+        ]
+      },
+     
     ]
   }
 ]);

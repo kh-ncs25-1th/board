@@ -1,13 +1,11 @@
 import { Outlet } from "react-router-dom"
+import Header from "../../widgets/Header";
 
 const DefaultLoyout=()=>{
   return(
 
-  <div className="">
-
-    <header>
-      <h1>헤더</h1>
-    </header>
+  <div className="default-layout">
+    <Header />
     <main className="main-content">
       <Outlet />
     </main>
