@@ -6,6 +6,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.board.backand_api.domain.dto.BoardListResponse;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -46,5 +48,12 @@ public class BoardEntity {
 	@UpdateTimestamp//자동으로적용
 	@Column(columnDefinition = "timestamp")
 	private LocalDateTime updatedAt;
+	
+	//편의 메서드
+	public BoardListResponse toBoardListResponse() {
+		return BoardListResponse.builder()
+				.id(id).title(title).readCount(readCount).updatedAt(updatedAt)
+				.build();
+	}
 }
 

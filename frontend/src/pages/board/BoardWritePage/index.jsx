@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import './BoardWritePage.css'
+import { useNavigate } from 'react-router-dom';
+
 
 const BoardWritePage = () => {
+  const navigate=useNavigate();
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
 
@@ -13,7 +16,8 @@ const BoardWritePage = () => {
     }
     postData("http://localhost:8080/api/boards", boardData)
       .then(data => {
-        console.log("게시글저장 성공", data);
+        console.log("게시글저장 성공:", data);
+        navigate("/boards");
       })
       .catch(error => {
         console.log("서버 연결 실패")
