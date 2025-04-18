@@ -1,2 +1,105 @@
+/* 홈페이지 전체 스타일 */
+.home {
+  min-height: 100vh;
+  background-color: var(--light-color);
+}
 
-h1{color: red;}
+/* 히어로 섹션 스타일 */
+.hero {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+  color: var(--white-color);
+  padding: var(--spacing-xxl) 0;
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+
+/* 히어로 설명 텍스트 스타일 */
+.hero-description {
+  font-size: var(--font-lg);
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* 기능 소개 섹션 스타일 */
+.features {
+  padding: var(--spacing-xl) 0;
+  background-color: var(--white-color);
+  border-radius: var(--radius-lg);
+  margin: 0 var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+}
+
+/* 기능 카드 그리드 레이아웃 */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-xl);
+  padding: 0 var(--spacing-lg);
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 기능 카드 스타일 */
+.feature-card {
+  background: var(--white-color);
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-light);
+}
+
+/* 기능 카드 호버 효과 */
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-color);
+}
+
+/* 기능 아이콘 스타일 */
+.feature-icon {
+  font-size: var(--font-xxl);
+  margin-bottom: var(--spacing-lg);
+  color: var(--primary-color);
+}
+
+/* 기능 제목 스타일 */
+.feature-title {
+  font-size: var(--font-xl);
+  margin-bottom: var(--spacing-md);
+  color: var(--text-primary);
+}
+
+/* 기능 설명 텍스트 스타일 */
+.feature-description {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1024px) {
+  .features-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+    padding: 0 var(--spacing-md);
+  }
+}
+
+@media (max-width: 768px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+  
+  .feature-card {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+} 

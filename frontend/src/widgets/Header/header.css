@@ -1,0 +1,159 @@
+/* 헤더 전체 스타일 */
+.header {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  padding: var(--spacing-md) 0;
+  box-shadow: var(--shadow-md);
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+/* 헤더 내부 컨텐츠 정렬 */
+.header-wrap {
+  display: flex; /* 플렉스 박스 레이아웃 */
+  justify-content: space-between; /* 좌우 정렬 */
+  align-items: center; /* 수직 중앙 정렬 */
+  height: 60px;
+}
+
+/* 로고 영역 스타일 */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* 로고 텍스트 스타일 */
+.logo .wrap {
+  font-size: var(--font-xl);
+  font-weight: 700;
+  margin: 0;
+}
+
+/* 홈 링크 스타일 */
+.wrap a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* 네비게이션 메뉴 리스트 스타일 */
+nav ul {
+  list-style: none; /* 리스트 스타일 제거 */
+  margin: 0; /* 여백 제거 */
+  padding: 0; /* 패딩 제거 */
+  display: flex; /* 플렉스 박스 레이아웃 */
+  gap: 1.5rem;
+}
+
+/* 네비게이션 메뉴 아이템 스타일 */
+nav ul li {
+  margin-left: 1rem; /* 왼쪽 여백 */
+}
+
+/* 네비게이션 링크 스타일 */
+nav ul li a {
+  color: var(--white-color);
+  text-decoration: none;
+  font-weight: 500;
+  padding: var(--spacing-sm) 0;
+}
+
+/* 네비게이션 링크 호버 효과 */
+nav ul li a:hover {
+  color: var(--primary-light);
+}
+
+/* 회원 메뉴 영역 스타일 */
+.member-menu {
+  display: flex; /* 플렉스 박스 레이아웃 */
+  align-items: center; /* 수직 중앙 정렬 */
+  gap: 1rem; /* 메뉴 간격 */
+}
+
+/* 회원 메뉴 버튼 스타일 */
+.member-menu button {
+  color: var(--white-color);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-sm);
+  transition: all 0.3s ease;
+  font-size: var(--font-sm);
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+/* 로그인 버튼 스타일 */
+.member-menu .login-btn {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* 회원가입 버튼 스타일 */
+.member-menu .signup-btn {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* 버튼 호버 효과 */
+.member-menu button:hover {
+  background-color: rgba(255, 255, 255, 0.4); /* 호버 시 배경색 변경 */
+  transform: translateY(-2px); /* 살짝 위로 이동 */
+}
+
+/* 로그인된 상태의 사용자 정보 스타일 */
+.member-info {
+  display: flex; /* 플렉스 박스 레이아웃 */
+  align-items: center; /* 수직 중앙 정렬 */
+  gap: 0.5rem; /* 요소 간격 */
+}
+
+/* 사용자 프로필 이미지 스타일 */
+.member-info .profile-img {
+  width: 32px; /* 이미지 크기 */
+  height: 32px; /* 이미지 크기 */
+  border-radius: 50%; /* 원형 이미지 */
+  background-color: white; /* 흰색 배경 */
+  overflow: hidden; /* 이미지 넘침 방지 */
+}
+
+/* 사용자 이름 스타일 */
+.member-info .username {
+  font-size: 0.9rem; /* 폰트 크기 */
+  font-weight: 500; /* 글씨 굵기 */
+}
+
+/* 드롭다운 메뉴 스타일 */
+.member-dropdown {
+  position: relative; /* 상대적 위치 */
+}
+
+/* 드롭다운 메뉴 내용 스타일 */
+.member-dropdown-content {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--white-color);
+  min-width: 160px;
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-sm);
+  z-index: 1;
+  display: none;
+}
+
+/* 드롭다운 메뉴 표시 */
+.member-dropdown:hover .member-dropdown-content {
+  display: block; /* 호버 시 표시 */
+}
+
+/* 드롭다운 메뉴 아이템 스타일 */
+.member-dropdown-content a {
+  color: var(--text-primary);
+  padding: var(--spacing-md) var(--spacing-lg);
+  display: block;
+  text-decoration: none;
+}
+
+/* 드롭다운 메뉴 아이템 호버 효과 */
+.member-dropdown-content a:hover {
+  background-color: var(--light-color);
+}
