@@ -4,7 +4,7 @@ import './app/assets/App.css'
 import AppProvider from './app/providers/AppProvider'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+ //<React.StrictMode>
     <AppProvider />
-  </React.StrictMode>,
+ //</React.StrictMode>,
 )

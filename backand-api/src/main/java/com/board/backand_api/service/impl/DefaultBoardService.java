@@ -2,6 +2,8 @@ package com.board.backand_api.service.impl;
 
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +18,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class DefaultBoardService implements BoardService{
 
-    private final Integer forwardedPort;
-	
+    	
 	private final BoardEntityRepository repository;
 
 
@@ -41,11 +42,20 @@ public class DefaultBoardService implements BoardService{
 		}
 		*/
 		
-		return ResponseEntity.ok(repository.findAll().stream()										
+		return ResponseEntity.ok(repository.findAll(Sort.by(Direction.DESC, "id")).stream()										
 										//.map((entity)->{return entity.toBoardListResponse();})
 										.map(BoardEntity::toBoardListResponse)
 										.collect(Collectors.toList())
 		);
+	}
+
+	@Override
+	public ResponseEntity<?> getBoard(Long id) {
+		
+		//Optional//java8 (null처리를 위해)
+		return ResponseEntity.ok(repository.findById(id)
+											.map(BoardEntity::toBoardDeatilResponse)
+											.orElseThrow());
 	}
 
 }

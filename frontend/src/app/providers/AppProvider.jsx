@@ -3,6 +3,7 @@ import DefaultLayout from "../layouts/DefaultLayout";
 import HomePage from "../../pages/HomePage";
 import BoardWritePage from "../../pages/board/BoardWritePage";
 import BoardListPage from "../../pages/board/BoardListPage";
+import BoardDetailPage from "../../pages/board/BoardDetailPage";
 
 const router=createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router=createBrowserRouter([
           {
             path: "new",
             element: <BoardWritePage />
+          },
+          {
+            path: ":boardId",
+            element: <BoardDetailPage />
           },
         ]
       },

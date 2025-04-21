@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.board.backand_api.domain.dto.BoardDeatilResponse;
 import com.board.backand_api.domain.dto.BoardListResponse;
 
 import jakarta.persistence.Column;
@@ -53,6 +54,14 @@ public class BoardEntity {
 	public BoardListResponse toBoardListResponse() {
 		return BoardListResponse.builder()
 				.id(id).title(title).readCount(readCount).updatedAt(updatedAt)
+				.build();
+	}
+	
+	//편의 메서드
+	public BoardDeatilResponse toBoardDeatilResponse() {
+		return BoardDeatilResponse.builder()
+				.id(id).title(title).readCount(readCount).updatedAt(updatedAt)
+				.content(content).createdAt(createdAt)
 				.build();
 	}
 }

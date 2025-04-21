@@ -6,12 +6,38 @@ const BoardListPage = () => {
   const [boards, setBoards]=useState([]);
   const [isLoding, setIsLoding]=useState(true);
   const [error, setError]=useState(null);
+  /*
+  //날짜시간 오늘날짜이면 시:분:초, 오늘이전 년-월-일
+  const formatDate=(dateString)=>{
+    const today=new Date();
+    console.log("today:",today);
+    const updatedAt=new Date(dateString);
+    console.log("updatedAt:",updatedAt);
+
+    const isToday=
+      today.getFullYear() === updatedAt.getFullYear() &&
+      today.getMonth() === updatedAt.getMonth() &&
+      today.getDate() === updatedAt.getDate();
+    if(isToday){
+      //오늘이면
+      return `${updatedAt.getHours().toString().padStart(2,'0')}:
+        ${updatedAt.getMinutes().toString().padStart(2,'0')}:
+        ${updatedAt.getSeconds().toString().padStart(2,'0')}`;
+    }
+    return `
+      ${updatedAt.getFullYear()}-
+      ${(updatedAt.getMonth()+1).toString().padStart(2,'0')}-
+      ${updatedAt.getDate().toString().padStart(2,'0')}`;
+  }
+  //*/
+
 
   useEffect(()=>{
     const fetchApi=async ()=>{
       try {
         const response=await fetch("http://localhost:8080/api/boards");
         const data=await response.json();
+      
         setBoards(data);
         
         setError(null);
@@ -56,10 +82,15 @@ const BoardListPage = () => {
           {boards.map((board)=>
           <tr key={board.id}>
             <td>{board.id}</td>
-            <td>{board.title}</td>
+            <td>
+              <Link to={`./${board.id}`}>{board.title}</Link> 
+            </td>
             <td>{board.readCount}</td>
             <td>{'guest'}</td>
-            <td>{board.updatedAt}</td>
+            <td>
+              {/* {formatDate(board.updatedAt)} */}
+              {board.formattedDate}
+            </td>
           </tr>
           )}
         </tbody>

@@ -51,8 +51,8 @@ public class SSHTunnellingConfig {
     // 포트 포워딩을 설정하는 빈 메서드
     @Bean
     Integer forwardedPort(Session session, SSHTunnellingProperties sshProperties) throws JSchException {
-        // 3307-3316 사이의 랜덤 포트 생성
-        int randomPort = new Random().nextInt(10) + 3307;
+        // 30001-40000 사이의 랜덤 포트 생성:리프래쉬 될때마다 새로운포트로 연결하기위해(충돌회피) 범위를 크게잡았어요
+        int randomPort = new Random().nextInt(10000) + 30001;
         // 로컬 포트와 RDS 포트를 연결하는 포트 포워딩 설정
         int localPort = session.setPortForwardingL(randomPort, 
                 sshProperties.getRdsHost(), sshProperties.getRdsPort());

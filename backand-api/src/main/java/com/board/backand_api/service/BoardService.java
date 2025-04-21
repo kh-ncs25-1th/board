@@ -10,4 +10,6 @@ public interface BoardService {
 
 	ResponseEntity<?> getBoardList();
 
+	ResponseEntity<?> getBoard(Long id);
+
 }
