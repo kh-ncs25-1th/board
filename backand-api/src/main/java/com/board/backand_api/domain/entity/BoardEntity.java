@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import com.board.backand_api.domain.dto.BoardDeatilResponse;
 import com.board.backand_api.domain.dto.BoardListResponse;
+import com.board.backand_api.domain.dto.BoardUpdateRequst;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,6 +17,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -43,25 +45,57 @@ public class BoardEntity {
 	private String content;
 	
 	private int readCount;//default:0
+	
 	@CreationTimestamp//자동으로적용
 	@Column(columnDefinition = "timestamp")
 	private LocalDateTime createdAt;
+	
 	@UpdateTimestamp//자동으로적용
 	@Column(columnDefinition = "timestamp")
 	private LocalDateTime updatedAt;
 	
+	public BoardEntity incrementReadCount() {
+		readCount++;
+		return this;
+	}
+	
+	//수정데이터를 매핑하는 편의메서드
+	public BoardEntity update(BoardUpdateRequst dto) {
+		this.title=dto.title();
+		this.content=dto.content();
+		return BoardEntity.this;
+	}
+	
 	//편의 메서드
 	public BoardListResponse toBoardListResponse() {
 		return BoardListResponse.builder()
-				.id(id).title(title).readCount(readCount).updatedAt(updatedAt)
+				.id(id).title(title).readCount(readCount)
+				.updatedAt(updatedAt).createdAt(createdAt)
+				.build();
+	}
+	
+	public BoardDeatilResponse toBoardUpdateResponse(BoardUpdateRequst dto) {
+		this.title=dto.title();
+		this.content=dto.content();
+		return BoardDeatilResponse.builder()
+				.id(id)
+				.title(title)
+				.readCount(readCount)
+				.updatedAt(updatedAt)
+				.content(content)
+				.createdAt(createdAt)
 				.build();
 	}
 	
 	//편의 메서드
 	public BoardDeatilResponse toBoardDeatilResponse() {
 		return BoardDeatilResponse.builder()
-				.id(id).title(title).readCount(readCount).updatedAt(updatedAt)
-				.content(content).createdAt(createdAt)
+				.id(id)
+				.title(title)
+				.readCount(++readCount)//조회수가 업데이트(@Transactional이 적용되어서) 됩니다.
+				.updatedAt(updatedAt)
+				.content(content)
+				.createdAt(createdAt)
 				.build();
 	}
 }

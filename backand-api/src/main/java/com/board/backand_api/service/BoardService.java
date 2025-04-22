@@ -3,6 +3,7 @@ package com.board.backand_api.service;
 import org.springframework.http.ResponseEntity;
 
 import com.board.backand_api.domain.dto.BoardSaveRequst;
+import com.board.backand_api.domain.dto.BoardUpdateRequst;
 
 public interface BoardService {
 
@@ -11,5 +12,7 @@ public interface BoardService {
 	ResponseEntity<?> getBoardList();
 
 	ResponseEntity<?> getBoard(Long id);
+
+	ResponseEntity<?> updateBoard(Long id, BoardUpdateRequst dto);
 
 }

@@ -26,4 +26,6 @@ public class BoardDeatilResponse {
 	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
 	private LocalDateTime createdAt;
 
+	
+
 }

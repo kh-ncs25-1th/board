@@ -6,8 +6,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.board.backand_api.domain.dto.BoardSaveRequst;
+import com.board.backand_api.domain.dto.BoardUpdateRequst;
 import com.board.backand_api.domain.entity.BoardEntity;
 import com.board.backand_api.domain.entity.BoardEntityRepository;
 import com.board.backand_api.service.BoardService;
@@ -49,13 +51,32 @@ public class DefaultBoardService implements BoardService{
 		);
 	}
 
+	//상페페이지 처리로직
+	//JPA의 더티 체킹을 활용한 효율적인 업데이트
+	//조회수 업데이트 처리를 위해서 @Transactional
+	@Transactional//org.springframework.transaction.annotation.Transactional;
 	@Override
 	public ResponseEntity<?> getBoard(Long id) {
-		
-		//Optional//java8 (null처리를 위해)
+		//원본
+		/*
+		BoardEntity result=repository.findById(id).orElseThrow();
+		result.incrementReadCount();
+		result=repository.save(result);
+		*/
 		return ResponseEntity.ok(repository.findById(id)
-											.map(BoardEntity::toBoardDeatilResponse)
-											.orElseThrow());
+									//.map(BoardEntity::incrementReadCount)
+									.map(BoardEntity::toBoardDeatilResponse)
+									.orElseThrow());
+	}
+
+	@Transactional
+	@Override
+	public ResponseEntity<?> updateBoard(Long id, BoardUpdateRequst dto) {
+		// id의 게시글을 수정해야해요
+		return ResponseEntity.ok(repository.findById(id)
+				//.map((entity)->entity.update(dto))
+				.map((entity)->entity.toBoardUpdateResponse(dto))
+				.orElseThrow());
 	}
 
 }

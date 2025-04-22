@@ -154,3 +154,11 @@ const router=createBrowserRouter([
 # Part 08. 서버-게시글 리스트 내림차순으로 처리
 ---
 # Part 09. 서버-게시글 상세페이지 이동-(조회수 업데이트 안됨)
+---
+# Part 10. 서버-게시글 조회수 업데이트 처리 - jpa 더티체킹 활용
+---
+# Part 11. 프론트-게시글 상세페이지/수정화면 mui모달활용 하기
+---
+# Part 12. 서버,프론트-게시글 수정처리
+- react 에서 await 누락되어 정보가 표기되지 않았어요 수정함.
+const updatedData= await response.json();
