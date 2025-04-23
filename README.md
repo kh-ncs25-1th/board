@@ -162,3 +162,8 @@ const router=createBrowserRouter([
 # Part 12. 서버,프론트-게시글 수정처리
 - react 에서 await 누락되어 정보가 표기되지 않았어요 수정함.
 const updatedData= await response.json();
+---
+# Part 13. 서버,프론트-게시글 수정처리-상황에따른 다른방법 처리해보기
+---
+# Part 14. 서버,프론트-게시글 삭제처리-useNavigate 활용
+- css 추가하였습니다. 삭제모달 추가하여 소스코드가 약간 변경되었습니다.
