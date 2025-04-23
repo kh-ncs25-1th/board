@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,6 +50,13 @@ public class BoardController {
 			
 		
 		return service.updateBoard(id, dto);
+	}
+	
+	//삭제 처리
+	@DeleteMapping("/api/boards/{id}")
+	public ResponseEntity<?> delete(@PathVariable(name = "id") Long id) {
+		
+		return service.deleteBoard(id);
 	}
 	
 	

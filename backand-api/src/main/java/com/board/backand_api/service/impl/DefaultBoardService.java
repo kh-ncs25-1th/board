@@ -73,10 +73,20 @@ public class DefaultBoardService implements BoardService{
 	@Override
 	public ResponseEntity<?> updateBoard(Long id, BoardUpdateRequst dto) {
 		// id의 게시글을 수정해야해요
+		
+		//int result=repository.updateBoard(dto.title(),dto.content(), id);
+		//int result=repository.updateBoard(id, dto);
+		
 		return ResponseEntity.ok(repository.findById(id)
-				//.map((entity)->entity.update(dto))
-				.map((entity)->entity.toBoardUpdateResponse(dto))
-				.orElseThrow());
+									.map(entity->entity.toBoardUpdateResponse(dto))
+									.orElseThrow());
+	}
+
+	@Override
+	public ResponseEntity<?> deleteBoard(Long id) {
+		repository.deleteById(id);
+		
+		return ResponseEntity.ok(true);
 	}
 
 }

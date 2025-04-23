@@ -15,4 +15,6 @@ public interface BoardService {
 
 	ResponseEntity<?> updateBoard(Long id, BoardUpdateRequst dto);
 
+	ResponseEntity<?> deleteBoard(Long id);
+
 }

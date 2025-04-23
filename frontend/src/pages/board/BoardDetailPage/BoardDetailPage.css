@@ -1,0 +1,64 @@
+.board-detail-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.board-detail-title {
+  color: #333;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 1.8rem;
+}
+
+.board-detail-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.board-detail-item {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+}
+
+.board-detail-item:last-child {
+  border-bottom: none;
+}
+
+.board-detail-label {
+  font-weight: bold;
+  width: 100px;
+  color: #666;
+}
+
+.board-detail-content {
+  flex: 1;
+  color: #333;
+  line-height: 1.6;
+}
+
+.board-detail-actions {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+/* 다이얼로그 스타일링 */
+.MuiDialog-paper {
+  padding: 1rem;
+}
+
+.MuiDialogContent-root {
+  padding-top: 1rem !important;
+}
+
+.MuiTextField-root {
+  margin-bottom: 1rem !important;
+}

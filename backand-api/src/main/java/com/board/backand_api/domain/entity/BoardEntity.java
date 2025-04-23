@@ -59,13 +59,7 @@ public class BoardEntity {
 		return this;
 	}
 	
-	//수정데이터를 매핑하는 편의메서드
-	public BoardEntity update(BoardUpdateRequst dto) {
-		this.title=dto.title();
-		this.content=dto.content();
-		return BoardEntity.this;
-	}
-	
+		
 	//편의 메서드
 	public BoardListResponse toBoardListResponse() {
 		return BoardListResponse.builder()
