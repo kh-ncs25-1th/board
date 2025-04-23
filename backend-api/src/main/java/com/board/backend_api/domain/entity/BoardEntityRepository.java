@@ -1,4 +1,4 @@
-package com.board.backand_api.domain.entity;
+package com.board.backend_api.domain.entity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.board.backand_api.domain.dto.BoardUpdateRequst;
+import com.board.backend_api.domain.dto.BoardUpdateRequst;
 
 @Repository
 public interface BoardEntityRepository extends JpaRepository<BoardEntity, Long>{

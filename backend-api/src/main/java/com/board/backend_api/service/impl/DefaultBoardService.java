@@ -1,4 +1,4 @@
-package com.board.backand_api.service.impl;
+package com.board.backend_api.service.impl;
 
 import java.util.stream.Collectors;
 
@@ -8,11 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.board.backand_api.domain.dto.BoardSaveRequst;
-import com.board.backand_api.domain.dto.BoardUpdateRequst;
-import com.board.backand_api.domain.entity.BoardEntity;
-import com.board.backand_api.domain.entity.BoardEntityRepository;
-import com.board.backand_api.service.BoardService;
+import com.board.backend_api.domain.dto.BoardSaveRequst;
+import com.board.backend_api.domain.dto.BoardUpdateRequst;
+import com.board.backend_api.domain.entity.BoardEntity;
+import com.board.backend_api.domain.entity.BoardEntityRepository;
+import com.board.backend_api.service.BoardService;
 
 import lombok.RequiredArgsConstructor;
 

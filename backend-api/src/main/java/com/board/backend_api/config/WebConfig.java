@@ -1,4 +1,4 @@
-package com.board.backand_api.config;
+package com.board.backend_api.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

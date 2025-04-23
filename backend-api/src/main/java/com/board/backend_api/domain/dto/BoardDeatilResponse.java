@@ -1,4 +1,4 @@
-package com.board.backand_api.domain.dto;
+package com.board.backend_api.domain.dto;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

@@ -1,4 +1,4 @@
-package com.board.backand_api.config;
+package com.board.backend_api.config;
 
 
 import java.util.Random;

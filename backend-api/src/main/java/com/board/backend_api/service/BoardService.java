@@ -1,9 +1,9 @@
-package com.board.backand_api.service;
+package com.board.backend_api.service;
 
 import org.springframework.http.ResponseEntity;
 
-import com.board.backand_api.domain.dto.BoardSaveRequst;
-import com.board.backand_api.domain.dto.BoardUpdateRequst;
+import com.board.backend_api.domain.dto.BoardSaveRequst;
+import com.board.backend_api.domain.dto.BoardUpdateRequst;
 
 public interface BoardService {
 

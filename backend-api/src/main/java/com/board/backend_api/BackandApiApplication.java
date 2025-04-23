@@ -1,4 +1,4 @@
-package com.board.backand_api;
+package com.board.backend_api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

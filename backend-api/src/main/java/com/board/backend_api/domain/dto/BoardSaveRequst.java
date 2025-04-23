@@ -1,6 +1,6 @@
-package com.board.backand_api.domain.dto;
+package com.board.backend_api.domain.dto;
 
-import com.board.backand_api.domain.entity.BoardEntity;
+import com.board.backend_api.domain.entity.BoardEntity;
 
 public record BoardSaveRequst(
 		String title, 

@@ -1,4 +1,4 @@
-package com.board.backand_api.domain.entity;
+package com.board.backend_api.domain.entity;
 
 import java.time.LocalDateTime;
 
@@ -6,9 +6,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.board.backand_api.domain.dto.BoardDeatilResponse;
-import com.board.backand_api.domain.dto.BoardListResponse;
-import com.board.backand_api.domain.dto.BoardUpdateRequst;
+import com.board.backend_api.domain.dto.BoardDeatilResponse;
+import com.board.backend_api.domain.dto.BoardListResponse;
+import com.board.backend_api.domain.dto.BoardUpdateRequst;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,7 +17,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
