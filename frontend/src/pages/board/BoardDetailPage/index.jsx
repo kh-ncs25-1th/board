@@ -72,7 +72,8 @@ const BoardDetailPage = () => {
       },
     });
 
-    if (response.ok) {
+    if (response.status===204) {
+      console.log("delete-status",response.status);
       //삭제성공시 처리-detail페이지이 있는게 이상하겠죠?
       navigate("/boards");
     } else {
