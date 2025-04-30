@@ -1,20 +1,22 @@
 package com.board.backend_api.service;
 
-import org.springframework.http.ResponseEntity;
+import java.util.List;
 
-import com.board.backend_api.domain.dto.BoardSaveRequst;
-import com.board.backend_api.domain.dto.BoardUpdateRequst;
+import com.board.backend_api.domain.dto.board.BoardDeatilResponse;
+import com.board.backend_api.domain.dto.board.BoardListItemResponse;
+import com.board.backend_api.domain.dto.board.BoardSaveRequst;
+import com.board.backend_api.domain.dto.board.BoardUpdateRequst;
 
 public interface BoardService {
+	
+	BoardListItemResponse create(BoardSaveRequst requst);
 
-	ResponseEntity<?> createBoard(BoardSaveRequst dto);
+	List<BoardListItemResponse> list();
 
-	ResponseEntity<?> getBoardList();
+	BoardDeatilResponse get(Long id);
 
-	ResponseEntity<?> getBoard(Long id);
+	BoardDeatilResponse update(Long id, BoardUpdateRequst requst);
 
-	ResponseEntity<?> updateBoard(Long id, BoardUpdateRequst dto);
-
-	ResponseEntity<?> deleteBoard(Long id);
+	void delete(Long id);
 
 }

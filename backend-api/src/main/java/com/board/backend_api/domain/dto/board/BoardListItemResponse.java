@@ -1,10 +1,11 @@
-package com.board.backend_api.domain.dto;
+package com.board.backend_api.domain.dto.board;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+import com.board.backend_api.domain.entity.BoardEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Builder;
@@ -12,7 +13,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class BoardListResponse {
+public class BoardListItemResponse {
 	
 	private Long id;
 	private String title;
@@ -30,5 +31,17 @@ public class BoardListResponse {
 			return createdAt.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
 		}
 		return createdAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+	}
+	
+	
+	//Entitiy->BoardListItemResponse 객체에 매핑하는 메서드
+	public static BoardListItemResponse fromEntity(BoardEntity entity) {
+		return BoardListItemResponse.builder()
+				.id(entity.getId())
+				.title(entity.getTitle())
+				.readCount(entity.getReadCount())
+				.createdAt(entity.getCreatedAt())
+				.updatedAt(entity.getUpdatedAt())
+				.build();
 	}
 }

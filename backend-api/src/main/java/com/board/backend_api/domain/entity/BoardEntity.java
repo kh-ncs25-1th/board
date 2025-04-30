@@ -6,9 +6,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.board.backend_api.domain.dto.BoardDeatilResponse;
-import com.board.backend_api.domain.dto.BoardListResponse;
-import com.board.backend_api.domain.dto.BoardUpdateRequst;
+import com.board.backend_api.domain.dto.board.BoardDeatilResponse;
+import com.board.backend_api.domain.dto.board.BoardListItemResponse;
+import com.board.backend_api.domain.dto.board.BoardUpdateRequst;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -58,38 +58,11 @@ public class BoardEntity {
 		return this;
 	}
 	
-		
-	//편의 메서드
-	public BoardListResponse toBoardListResponse() {
-		return BoardListResponse.builder()
-				.id(id).title(title).readCount(readCount)
-				.updatedAt(updatedAt).createdAt(createdAt)
-				.build();
+	public BoardEntity update(BoardUpdateRequst requst) {
+		this.title=requst.title();
+		this.content=requst.content();
+		return BoardEntity.this;//set기능수행->원본을수정한 객체를 리턴
 	}
 	
-	public BoardDeatilResponse toBoardUpdateResponse(BoardUpdateRequst dto) {
-		this.title=dto.title();
-		this.content=dto.content();
-		return BoardDeatilResponse.builder()
-				.id(id)
-				.title(title)
-				.readCount(readCount)
-				.updatedAt(updatedAt)
-				.content(content)
-				.createdAt(createdAt)
-				.build();
-	}
-	
-	//편의 메서드
-	public BoardDeatilResponse toBoardDeatilResponse() {
-		return BoardDeatilResponse.builder()
-				.id(id)
-				.title(title)
-				.readCount(++readCount)//조회수가 업데이트(@Transactional이 적용되어서) 됩니다.
-				.updatedAt(updatedAt)
-				.content(content)
-				.createdAt(createdAt)
-				.build();
-	}
 }
 

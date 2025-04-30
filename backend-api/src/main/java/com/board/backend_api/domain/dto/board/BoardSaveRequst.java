@@ -1,4 +1,4 @@
-package com.board.backend_api.domain.dto;
+package com.board.backend_api.domain.dto.board;
 
 import com.board.backend_api.domain.entity.BoardEntity;
 
