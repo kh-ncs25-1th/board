@@ -1,39 +1,30 @@
 import { useState } from 'react';
 import './BoardWritePage.css'
 import { useNavigate } from 'react-router-dom';
+import { useBoard } from '../../../features/board/hooks/useBoard';
 
 
 const BoardWritePage = () => {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
+  const { create } = useBoard();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const boardData = {
-      title,
-      content
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      const boardData = {
+        title,
+        content
+      }
+      await create(boardData);
+      navigate("/boards");
+    } catch (error) {
+      console.error("등록실패", error)
     }
-    postData("http://localhost:8080/api/boards", boardData)
-      .then(data => {
-        console.log("게시글저장 성공:", data);
-        navigate("/boards");
-      })
-      .catch(error => {
-        console.log("서버 연결 실패")
-      })
   }
 
-  async function postData(url = "", data = {}) {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    return response.json();
-  }
+
 
   return (
     <div className="board-write">
@@ -42,21 +33,21 @@ const BoardWritePage = () => {
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label className="form-label">제목</label>
-            <input 
+            <input
               className="form-input"
-              name='title' 
-              type='text'  
-              value={title} 
-              onChange={(e) => setTitle(e.target.value)} 
+              name='title'
+              type='text'
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
               placeholder="제목을 입력하세요"
             />
           </div>
           <div className="form-group">
             <label className="form-label">내용</label>
-            <textarea 
+            <textarea
               className="form-textarea"
-              name='content' 
-              value={content} 
+              name='content'
+              value={content}
               onChange={(e) => setContent(e.target.value)}
               placeholder="내용을 입력하세요"
             />

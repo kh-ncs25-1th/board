@@ -1,59 +1,28 @@
 import { Link } from 'react-router-dom';
 import './BoardListPage.css'
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { useBoard } from '../../../features/board/hooks/useBoard';
 
 const BoardListPage = () => {
   const [boards, setBoards]=useState([]);
-  const [isLoding, setIsLoding]=useState(true);
-  const [error, setError]=useState(null);
-  /*
-  //날짜시간 오늘날짜이면 시:분:초, 오늘이전 년-월-일
-  const formatDate=(dateString)=>{
-    const today=new Date();
-    console.log("today:",today);
-    const updatedAt=new Date(dateString);
-    console.log("updatedAt:",updatedAt);
+  const {loading, error, getList}=useBoard();
 
-    const isToday=
-      today.getFullYear() === updatedAt.getFullYear() &&
-      today.getMonth() === updatedAt.getMonth() &&
-      today.getDate() === updatedAt.getDate();
-    if(isToday){
-      //오늘이면
-      return `${updatedAt.getHours().toString().padStart(2,'0')}:
-        ${updatedAt.getMinutes().toString().padStart(2,'0')}:
-        ${updatedAt.getSeconds().toString().padStart(2,'0')}`;
+
+  const fetchBoards=useCallback(async()=>{
+    try {
+      const data=await getList();
+      setBoards(data);
+    } catch (error) {
+      console.error('게시글 읽기 실패:', error);
     }
-    return `
-      ${updatedAt.getFullYear()}-
-      ${(updatedAt.getMonth()+1).toString().padStart(2,'0')}-
-      ${updatedAt.getDate().toString().padStart(2,'0')}`;
-  }
-  //*/
-
-
+  });
   useEffect(()=>{
-    const fetchApi=async ()=>{
-      try {
-        const response=await fetch("http://localhost:8080/api/boards");
-        const data=await response.json();
-      
-        setBoards(data);
-        
-        setError(null);
-      } catch (error) {
-        console.error('게시글 읽기 실패!', error);
-        setError('서버와 연결이 실패하였습니다. 잠시후 다시 이용해 주세요!')
-      }finally{
-        setIsLoding(false)//에러가 발생하든 성공하면 로딩상황은 아니므로
-      }
-      
-    }
+    fetchBoards()
+  },[getList])
+  //useEffect의 콜백 함수는 cleanup 함수를 반환할 수 있어야 하는데, async 함수는 Promise를 반환하기 때문입니다.
+  //에러 처리가 어려워집니다.
 
-    fetchApi();
-  },[])
-
-  if(isLoding) {
+  if(loading) {
     return <div>로딩 중...</div>
   } 
   if(error!=null){

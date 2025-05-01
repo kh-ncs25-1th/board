@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './BoardDetailPage.css'
 import { useNavigate, useParams } from 'react-router-dom';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material';
+import { useBoard } from '../../../features/board/hooks/useBoard';
 const BoardDetailPage = () => {
   const navigate = useNavigate();
   // 모달 상태를 구분해서 관리
@@ -16,18 +17,22 @@ const BoardDetailPage = () => {
   //조회할떄???
   let params = useParams()// React Router에서 제공하는 훅으로, URL의 파라미터 값을 가져오는 데 사용
   const boardId = params.boardId; //path: ":boardId"
+  const { loading, error, get, update, remove } = useBoard();
 
   useEffect(() => {
     const fetchApi = async () => {
-      const response = await fetch(`http://localhost:8080/api/boards/${boardId}`);
-      const data = await response.json();
-      console.log(">>>", data)
-      setBoard(data)
-      setUpdatedBoard({ title: data.title, content: data.content })
+      try {
+        const data = await get(boardId)
+        setBoard(data)
+        setUpdatedBoard({ title: data.title, content: data.content })
+      } catch (error) {
+        console.error("게시글 상세조회 실패", error);
+      }
+
     }
     fetchApi();
 
-  }, []);
+  }, [boardId, get]);
 
   // 수정 모달 제어
   const handleUpdateOpen = () => {
@@ -47,40 +52,34 @@ const BoardDetailPage = () => {
 
 
   const handleUpdate = async () => {
-    //수정처리완료후 
-    const response = await fetch(`http://localhost:8080/api/boards/${boardId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedBoard),
-    });
-    const updatedData = await response.json();
-    setBoard(updatedData);
-    //const updatedCount = await response.json();
-    //console.log("updatedData>>", updatedCount)
-    //if (updatedCount === 1) setBoard({ ...board, title: updatedBoard.title, content: updatedBoard.content });
-    //모달닫기
-    handleUpdateClose();
+    try {
+      //수정처리완료후 
+      const data = await update(boardId, updatedBoard)
+      setBoard(data);
+
+      //모달닫기
+      handleUpdateClose();
+    } catch (error) {
+      console.error('게시글 수정실패!', error)
+    }
+
   }
 
   const handleDelete = async () => {
-    const response = await fetch(`http://localhost:8080/api/boards/${boardId}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    try {
+      const response=await remove(boardId)
 
-    if (response.status===204) {
-      console.log("delete-status",response.status);
-      //삭제성공시 처리-detail페이지이 있는게 이상하겠죠?
-      navigate("/boards");
-    } else {
-
+      if (response.status === 204) {
+        console.log("delete-status", response.status);
+        //삭제성공시 처리-detail페이지이 있는게 이상하겠죠?
+        navigate("/boards");
+      } else {}
+      //모달닫기
+      handleDeleteClose()
+    } catch (error) {
+      console.error('게시글 삭제실패!', error)
     }
-    //모달닫기
-    handleDeleteClose()
+
   }
 
   return (
