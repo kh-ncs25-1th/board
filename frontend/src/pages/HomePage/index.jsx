@@ -1,6 +1,15 @@
 import './HomePage.css'
+import Calendar from '../../components/Calendar/Calendar';
+import { useState } from 'react';
 
 const HomePage = () => {
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const handleDateSelect = (date) => {
+    setSelectedDate(date);
+    console.log('선택된 날짜:', date);
+  };
+
   return (<>
     <h1>Vite + React + Spring Boot 프로젝트</h1>
     <div className="home">
@@ -41,6 +50,9 @@ const HomePage = () => {
               </p>
             </div>
           </div>
+        </div>
+        <div>
+          <Calendar onDateSelect={handleDateSelect} />
         </div>
       </div>
     </div>

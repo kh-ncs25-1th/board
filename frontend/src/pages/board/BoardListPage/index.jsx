@@ -8,14 +8,11 @@ const BoardListPage = () => {
   const {loading, error, getList}=useBoard();
 
 
-  const fetchBoards=useCallback(async()=>{
-    try {
-      const data=await getList();
-      setBoards(data);
-    } catch (error) {
-      console.error('게시글 읽기 실패:', error);
-    }
-  });
+  const fetchBoards=async()=>{
+    const data=await getList();
+    setBoards(data);
+    console.error('게시글 읽기 실패:', error);
+  };
   useEffect(()=>{
     fetchBoards()
   },[getList])

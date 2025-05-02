@@ -16,7 +16,7 @@ const Header = () => {
         </nav>
         <div className={styles.auth}>
           <Link to="/login" className={styles.loginBtn}>로그인</Link>
-          <Link to="/register" className={styles.signupBtn}>회원가입</Link>
+          <Link to="/signup" className={styles.signupBtn}>회원가입</Link>
         </div>
       </div>
     </header>

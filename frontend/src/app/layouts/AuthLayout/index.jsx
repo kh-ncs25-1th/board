@@ -6,13 +6,7 @@ const AuthLayout = () => {
   return (
     <div className={styles.container}>
       <div className={styles.box}>
-        <div className={styles.header}>
-          <h1>Welcome</h1>
-          <p>로그인 또는 회원가입을 진행해주세요</p>
-        </div>
-        <div className={styles.content}>
-          <Outlet />
-        </div>
+        <Outlet />
       </div>
     </div>
   );

@@ -31,7 +31,7 @@ import lombok.NoArgsConstructor;
 		sequenceName = "board_seq", initialValue = 101, allocationSize = 1)
 @Table(name = "board")
 @Entity
-public class BoardEntity {
+public class BoardEntity extends BaseEntity{
 	
 	@Id
 	@GeneratedValue(generator = "board_seq_gen", strategy = GenerationType.SEQUENCE)
@@ -45,13 +45,7 @@ public class BoardEntity {
 	
 	private int readCount;//default:0
 	
-	@CreationTimestamp//자동으로적용
-	@Column(columnDefinition = "timestamp")
-	private LocalDateTime createdAt;
-	
-	@UpdateTimestamp//자동으로적용
-	@Column(columnDefinition = "timestamp")
-	private LocalDateTime updatedAt;
+
 	
 	public BoardEntity incrementReadCount() {
 		readCount++;

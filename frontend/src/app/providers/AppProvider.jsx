@@ -5,9 +5,9 @@ import HomePage from "../../pages/HomePage";
 import BoardWritePage from "../../pages/board/BoardWritePage";
 import BoardListPage from "../../pages/board/BoardListPage";
 import BoardDetailPage from "../../pages/board/BoardDetailPage";
-import ProfilePage from "../../pages/profile";
-import LoginPage from "../../pages/auth/login";
-import RegisterPage from "../../pages/auth/register";
+import ProfilePage from "../../pages/Profile";
+import LoginPage from "../../pages/auth/LoginPage";
+import RegisterPage from "../../pages/auth/RegisterPage";
 
 const router = createBrowserRouter([
   {
@@ -50,7 +50,7 @@ const router = createBrowserRouter([
         element: <LoginPage />
       },
       {
-        path: "register",
+        path: "signup",
         element: <RegisterPage />
       }
     ]

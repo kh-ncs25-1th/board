@@ -94,9 +94,6 @@ export const useBoard=()=>{
       setLoading(false)//api요청종료 또는 에러후 처리
     }
   },[])
-
-
-
   return{
     loading,
     error,
