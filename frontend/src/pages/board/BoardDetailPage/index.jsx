@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import './BoardDetailPage.css'
 import { useNavigate, useParams } from 'react-router-dom';
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, CircularProgress, Alert, AlertTitle } from '@mui/material';
 import { useBoard } from '../../../features/board/hooks/useBoard';
+
 const BoardDetailPage = () => {
   const navigate = useNavigate();
   // 모달 상태를 구분해서 관리
@@ -15,24 +16,20 @@ const BoardDetailPage = () => {
   });
   //서버에 접속해서 url path변수의 값에 해당하는 게시글을 읽어오면됨
   //조회할떄???
-  let params = useParams()// React Router에서 제공하는 훅으로, URL의 파라미터 값을 가져오는 데 사용
+  const params = useParams();
   const boardId = params.boardId; //path: ":boardId"
   const { loading, error, get, update, remove } = useBoard();
 
   useEffect(() => {
     const fetchApi = async () => {
-      try {
-        const data = await get(boardId)
-        setBoard(data)
-        setUpdatedBoard({ title: data.title, content: data.content })
-      } catch (error) {
-        console.error("게시글 상세조회 실패", error);
+      const data = await get(boardId);
+      if (!error) {  // error가 null이면 API 호출이 성공한 것
+        setBoard(data);
+        setUpdatedBoard({ title: data.title, content: data.content });
       }
-
-    }
+    };
     fetchApi();
-
-  }, [boardId, get]);
+  }, [boardId]);
 
   // 수정 모달 제어
   const handleUpdateOpen = () => {
@@ -50,67 +47,88 @@ const BoardDetailPage = () => {
     setDeleteOpen(false);
   };
 
-
   const handleUpdate = async () => {
-    try {
-      //수정처리완료후 
-      const data = await update(boardId, updatedBoard)
+    const data = await update(boardId, updatedBoard);
+    if (!error) {  // error가 null이면 수정이 성공한 것
       setBoard(data);
-
-      //모달닫기
       handleUpdateClose();
-    } catch (error) {
-      console.error('게시글 수정실패!', error)
     }
-
-  }
+  };
 
   const handleDelete = async () => {
-    try {
-      const response=await remove(boardId)
-
-      if (response.status === 204) {
-        console.log("delete-status", response.status);
-        //삭제성공시 처리-detail페이지이 있는게 이상하겠죠?
-        navigate("/boards");
-      } else {}
-      //모달닫기
-      handleDeleteClose()
-    } catch (error) {
-      console.error('게시글 삭제실패!', error)
+    const response = await remove(boardId);
+    if (!error && response.status === 204) {  // error가 null이고 응답 상태가 204면 삭제가 성공한 것
+      navigate("/boards");
+      handleDeleteClose();
     }
+  };
 
-  }
+  // 에러 메시지 생성 함수
+  const getErrorMessage = (error) => {
+    if (error?.response?.status === 404) {
+      return "게시글을 찾을 수 없습니다.";
+    }
+    if (error?.response?.status === 403) {
+      return "접근 권한이 없습니다.";
+    }
+    if (error?.response?.status === 401) {
+      return "로그인이 필요합니다.";
+    }
+    return "데이터를 불러오는데 실패했습니다. 잠시 후 다시 시도해주세요.";
+  };
 
   return (
     <div className="board-detail-container">
       <h2 className="board-detail-title">상세페이지</h2>
-      <ul className="board-detail-list">
-        <li className="board-detail-item">
-          <span className="board-detail-label">번호:</span>
-          <span className="board-detail-content">{board.id}</span>
-        </li>
-        <li className="board-detail-item">
-          <span className="board-detail-label">조회수:</span>
-          <span className="board-detail-content">{board.readCount}</span>
-        </li>
-        <li className="board-detail-item">
-          <span className="board-detail-label">작성일:</span>
-          <span className="board-detail-content">{board.createdAt}, 최종수정일:{board.updatedAt}</span>
-        </li>
-        <li className="board-detail-item">
-          <span className="board-detail-label">제목:</span>
-          <span className="board-detail-content">{board.title}</span>
-        </li>
-        <li className="board-detail-item">
-          <span className="board-detail-label">내용:</span>
-          <span className="board-detail-content">{board.content}</span>
-        </li>
-      </ul>
-      <div className="board-detail-actions">
-        <Button variant='contained' color='primary' onClick={handleDeleteOpen}>삭제</Button>
-        <Button variant='contained' color='primary' onClick={handleUpdateOpen}>수정</Button>
-      </div>
+      {loading && <CircularProgress />}
+      {error && (
+        <Alert severity="error" sx={{ mb: 2 }}>
+          <AlertTitle>오류 발생</AlertTitle>
+          {getErrorMessage(error)}
+          <Button 
+            variant="outlined" 
+            size="small" 
+            sx={{ mt: 1 }}
+            onClick={() => window.location.reload()}
+          >
+            다시 시도
+          </Button>
+        </Alert>
+      )}
+      {/*
+      !loading: 로딩이 끝났을 때 (loading이 false일 때)
+      !error: 에러가 없을 때 (error가 null일 때)
+      */}
+      {!loading && !error && (
+        <>
+          <ul className="board-detail-list">
+            <li className="board-detail-item">
+              <span className="board-detail-label">번호:</span>
+              <span className="board-detail-content">{board.id}</span>
+            </li>
+            <li className="board-detail-item">
+              <span className="board-detail-label">조회수:</span>
+              <span className="board-detail-content">{board.readCount}</span>
+            </li>
+            <li className="board-detail-item">
+              <span className="board-detail-label">작성일:</span>
+              <span className="board-detail-content">{board.createdAt}, 최종수정일:{board.updatedAt}</span>
+            </li>
+            <li className="board-detail-item">
+              <span className="board-detail-label">제목:</span>
+              <span className="board-detail-content">{board.title}</span>
+            </li>
+            <li className="board-detail-item">
+              <span className="board-detail-label">내용:</span>
+              <span className="board-detail-content">{board.content}</span>
+            </li>
+          </ul>
+          <div className="board-detail-actions">
+            <Button variant='contained' color='primary' onClick={handleDeleteOpen}>삭제</Button>
+            <Button variant='contained' color='primary' onClick={handleUpdateOpen}>수정</Button>
+          </div>
+        </>
+      )}
       {/* 확인 모달 */}
       <Dialog
         open={deleteOpen}

@@ -2,7 +2,14 @@ import { useCallback, useState } from "react"
 import { boardApi } from "../api/boardApi";
 
 export const useBoard=()=>{
+  // API 요청 중인지 여부를 나타내는 상태
+  // true: API 요청 진행 중
+  // false: API 요청 완료 또는 초기 상태
   const [loading, setLoading]=useState(false);
+
+  // API 요청 중 발생한 에러를 저장하는 상태
+  // null: 에러 없음
+  // Error 객체: API 요청 중 발생한 에러 정보
   const [error, setError]=useState(null);
 
   const getList=useCallback(async(params)=>{
@@ -12,7 +19,7 @@ export const useBoard=()=>{
       return response.data; //api 응답 데이터 반환
     } catch (error) {
       setError(error)//에러상태 업데이트
-      throw error;   //상위로 에러 전파
+      //throw error;   //상위로 에러 전파
     }finally{
       setLoading(false)//api요청종료 또는 에러후 처리
     }
@@ -33,7 +40,7 @@ export const useBoard=()=>{
       return response.data; //api 응답 데이터 반환
     } catch (error) {
       setError(error)//에러상태 업데이트
-      throw error;   //상위로 에러 전파
+      //throw error;   //상위로 에러 전파
     }finally{
       setLoading(false)//api요청종료 또는 에러후 처리
     }
@@ -50,7 +57,7 @@ export const useBoard=()=>{
       return response.data; //api 응답 데이터 반환
     } catch (error) {
       setError(error)//에러상태 업데이트
-      throw error;   //상위로 에러 전파
+      //throw error;   //상위로 에러 전파
     }finally{
       setLoading(false)//api요청종료 또는 에러후 처리
     }
@@ -66,7 +73,7 @@ export const useBoard=()=>{
       return response;
     } catch (error) {
       setError(error)//에러상태 업데이트
-      throw error;   //상위로 에러 전파
+      //throw error;   //상위로 에러 전파
     }finally{
       setLoading(false)//api요청종료 또는 에러후 처리
     }
@@ -82,7 +89,7 @@ export const useBoard=()=>{
       
     } catch (error) {
       setError(error)//에러상태 업데이트
-      throw error;   //상위로 에러 전파
+      //throw error;   //상위로 에러 전파
     }finally{
       setLoading(false)//api요청종료 또는 에러후 처리
     }

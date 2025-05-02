@@ -1,0 +1,73 @@
+.header {
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  text-decoration: none;
+}
+
+.nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.navLink {
+  color: #666;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.navLink:hover {
+  color: #4a90e2;
+}
+
+.auth {
+  display: flex;
+  gap: 1rem;
+}
+
+.loginBtn, .signupBtn {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.loginBtn {
+  color: #4a90e2;
+  border: 1px solid #4a90e2;
+}
+
+.loginBtn:hover {
+  background-color: #4a90e2;
+  color: white;
+}
+
+.signupBtn {
+  background-color: #4a90e2;
+  color: white;
+  border: 1px solid #4a90e2;
+}
+
+.signupBtn:hover {
+  background-color: #357abd;
+  border-color: #357abd;
+} 

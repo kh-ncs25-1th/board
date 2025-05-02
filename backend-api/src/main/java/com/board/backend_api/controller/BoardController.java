@@ -78,7 +78,7 @@ public class BoardController {
 	 * @param id - 게시글 ID
 	 * @return 삭제 결과
 	 */
-	@DeleteMapping("{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable(name = "id") Long id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();//204 No Content 상태코드 반환
