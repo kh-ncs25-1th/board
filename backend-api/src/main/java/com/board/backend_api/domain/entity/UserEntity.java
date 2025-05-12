@@ -1,10 +1,6 @@
 package com.board.backend_api.domain.entity;
 
-import java.time.LocalDateTime;
-
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,22 +19,22 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
-@SequenceGenerator(name = "user_seq_gen",
-sequenceName = "user_seq", initialValue = 1001, allocationSize = 1)
-@Table(name = "user")
+@SequenceGenerator(name = "gen_seq_users",
+	sequenceName = "seq_users", allocationSize = 1, initialValue = 1001
+)
+@Table(name = "users")
 @Entity
 public class UserEntity extends BaseEntity{
 	
 	@Id
-	@GeneratedValue(generator = "user_seq_gen", strategy = GenerationType.SEQUENCE)
 	@Column(name = "user_id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gen_seq_users")
 	private Long id;
-	@Column(nullable = false, unique = true)
+	
+	@Column(nullable = false, unique = true,columnDefinition = "varchar(255) COLLATE utf8mb4_bin")
 	private String email;
 	@Column(nullable = false)
 	private String password;
-	
 	private String name;
-	
 
 }
